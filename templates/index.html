@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+
+{% load bootstrap4 %}
+{% load static %}
+
+{% block body %}
+    <br>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Generate Short Url</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Get Short Url Info</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="row justify-content-center">
+                <div class="col">
+                    <form action="" method="post" class="form">
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
+                        {% buttons %}
+                        <div class="text-right">
+                          <button type="submit" class="btn btn-info mt-3">
+                            Generate
+                          </button>
+                        </div>
+                        {% endbuttons %}
+                    </form>
+
+                    {% if code %}
+                        <br>
+                        <hr>
+                        <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Transform URL</th>
+                                    <th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <p id="copy">{{ domain }}/{{ code.code }}</p>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-outline-success btn-sm" style="display: block;margin: auto;" id="copy_button">
+                                            Copy
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+        </div>
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="col-auto">
+                <label for="search_code" class="visually-hidden">Code</label>
+                <input type="text" class="form-control" id="search_code" placeholder="Short Url Code">
+            </div>
+            <div class="col-auto mt-3 text-right">
+                <button type="submit" class="btn btn-info mt-3" id="search_button">Confirm identity</button>
+            </div>
+            <div id="show">
+            </div>
+        </div>
+    </div>
+    {{ data|json_script:'data' }}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{% static 'detail.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  shorturl_web:
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    container_name: shorturl_web
+    command: python manage.py runserver 0.0.0.0:8001
+    volumes:
+      - static_volume:/usr/src/app/collect_static
+      - media_volume:/usr/src/app/media
+    expose:
+      - 8001
+    env_file:
+      - ../.env
+    networks:
+      - proxy-net
+
+volumes:
+  static_volume:
+  media_volume:
+
+networks:
+  proxy-net:
+    external: true
+    name: finance_network

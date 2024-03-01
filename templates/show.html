@@ -1,0 +1,22 @@
+{% load bootstrap4 %}
+
+{% block body %}
+    <br>
+    <div class="row justify-content-center">
+        <div class="col">
+            {% if is_find %}
+                <form action="" method="get" class="form">
+                    {% csrf_token %}
+                    {% bootstrap_form info_form %}
+                </form>
+            {% else %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>找不到此短網址代碼資訊!</strong> 請確認輸入資訊是否正確
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

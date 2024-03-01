@@ -1,0 +1,57 @@
+version: '3'
+
+services:
+  web:
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    container_name: web
+    command: python manage.py runserver 0.0.0.0:8001
+    volumes:
+      - static_volume:/usr/src/app/collect_static
+      - media_volume:/usr/src/app/media
+    expose:
+      - 8001
+    env_file:
+      - ../.env
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: postgres:13-alpine
+    container_name: db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - ../.env.db
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "postgres" ]
+      interval: 30s
+      timeout: 60s
+      retries: 5
+      start_period: 80s
+  schedule_job:
+    build:
+      context: ../
+      dockerfile: docker/schedule_job/Dockerfile
+    container_name: schedule_job
+    env_file:
+      - ../.env
+    depends_on:
+      db:
+        condition: service_healthy
+  nginx:
+    container_name: nginx
+    build: ./nginx
+    volumes:
+      - static_volume:/usr/src/app/collect_static
+      - media_volume:/usr/src/app/media
+    ports:
+      - 80:80
+    depends_on:
+      - web
+
+volumes:
+  postgres_data:
+  static_volume:
+  media_volume:
