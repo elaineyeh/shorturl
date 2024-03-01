@@ -125,7 +125,7 @@ if APP_ENV in ["dev", "staging", "prod"]:
     }
 else:
     DATABASES = {
-        'default': env.db('DATABASES_URL')
+        'default': env.db('DATABASE_URL')
     }
 
 
