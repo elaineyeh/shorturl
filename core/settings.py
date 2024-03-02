@@ -62,6 +62,8 @@ DEBUG = env.bool('DEBUG')
 
 ALLOWED_HOSTS = ['*',]
 
+CSRF_TRUSTED_ORIGINS = env("CSRF_TRUSTED_ORIGINS").split(" ")
+
 
 # Application definition
 
