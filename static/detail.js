@@ -29,8 +29,8 @@ $(document).ready(function () {
     });
 
     $("#copy_button").on("click", function () {
-        var copyText = document.getElementById("copy_text"); // 获取要复制的文本元素的引用
-        navigator.clipboard.writeText(copyText.innerText) // 使用剪贴板API写入文本
+        var copyText = document.getElementById("copy_text");
+        navigator.clipboard.writeText(copyText.innerText)
             .then(() => {
                 console.log('Text copied to clipboard');
             })

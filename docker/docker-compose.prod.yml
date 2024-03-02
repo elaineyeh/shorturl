@@ -8,8 +8,8 @@ services:
     container_name: shorturl_web
     command: python manage.py runserver 0.0.0.0:8001
     volumes:
-      - shorturl_static_volume:/usr/src/app/collect_static
-      - shorturl_media_volume:/usr/src/app/media
+      - static_volume:/usr/src/app/collect_static
+      - media_volume:/usr/src/app/media
     expose:
       - 8001
     env_file:
@@ -18,8 +18,8 @@ services:
       - proxy-net
 
 volumes:
-  shorturl_static_volume:
-  shorturl_media_volume:
+  static_volume:
+  media_volume:
 
 networks:
   proxy-net:
