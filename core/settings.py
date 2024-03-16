@@ -33,16 +33,12 @@ if APP_ENV in ["dev", "staging", "prod"]:
     ssm = boto3.client("ssm", region_name="us-east-1")
 
     parameter_list = [
-        "/logistics/" + APP_ENV + "/SECRET_KEY",
-        "/logistics/" + APP_ENV + "/RDS_HOSTNAME",
-        "/logistics/" + APP_ENV + "/RDS_DB_NAME",
-        "/logistics/" + APP_ENV + "/RDS_USERNAME",
-        "/logistics/" + APP_ENV + "/RDS_PASSWORD",
-        "/logistics/" + APP_ENV + "/RDS_PORT",
-        "/logistics/" + APP_ENV + "/EMAIL_HOST",
-        "/logistics/" + APP_ENV + "/EMAIL_HOST_USER",
-        "/logistics/" + APP_ENV + "/EMAIL_HOST_PASSWORD",
-        "/logistics/" + APP_ENV + "/DEFAULT_FROM_EMAIL",
+        "/copilot/shorturl/" + "short-" + APP_ENV + "/secrets/SECRET_KEY",
+        "/copilot/shorturl/" + "short-" + APP_ENV + "/secrets/RDS_HOSTNAME",
+        "/copilot/shorturl/" + "short-" + APP_ENV + "/secrets/RDS_DB_NAME",
+        "/copilot/shorturl/" + "short-" + APP_ENV + "/secrets/RDS_USERNAME",
+        "/copilot/shorturl/" + "short-" + APP_ENV + "/secrets/RDS_PASSWORD",
+        "/copilot/shorturl/" + "short-" + APP_ENV + "/secrets/RDS_PORT",
     ]
 
     for parameter in parameter_list:
@@ -81,6 +77,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "core.middleware.HealthCheckMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
