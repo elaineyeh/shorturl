@@ -10,6 +10,16 @@ phases:
       - chmod +x ./copilot-linux
   build:
     commands:
+      - export tag="$(git describe --tags --abbrev=0)"
+      - export datetime="$(git log -n 1 --pretty=format:'%cI')"
+      - export hash=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -b -8)
+      - echo "Generate version.ini"
+      - echo "[default]" > version.ini
+      - echo "tag=$tag" >> version.ini
+      - echo "datetime=$datetime" >> version.ini
+      - echo "hash=$hash" >> version.ini
+      - cat version.ini
+
       - ls -la core
       - echo "Generate .env file"
       - cp ./.env.dev core/.env
