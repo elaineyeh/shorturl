@@ -33,12 +33,12 @@ if APP_ENV in ["dev", "staging", "prod"]:
     ssm = boto3.client("ssm", region_name="us-east-1")
 
     parameter_list = [
-        "/copilot/shorturl/" + "short-" + APP_ENV + "/secrets/SECRET_KEY",
-        "/copilot/shorturl/" + "short-" + APP_ENV + "/secrets/RDS_HOSTNAME",
-        "/copilot/shorturl/" + "short-" + APP_ENV + "/secrets/RDS_DB_NAME",
-        "/copilot/shorturl/" + "short-" + APP_ENV + "/secrets/RDS_USERNAME",
-        "/copilot/shorturl/" + "short-" + APP_ENV + "/secrets/RDS_PASSWORD",
-        "/copilot/shorturl/" + "short-" + APP_ENV + "/secrets/RDS_PORT",
+        "/copilot/shorturl/" + "shorturl-" + APP_ENV + "/secrets/SECRET_KEY",
+        "/copilot/shorturl/" + "shorturl-" + APP_ENV + "/secrets/RDS_HOSTNAME",
+        "/copilot/shorturl/" + "shorturl-" + APP_ENV + "/secrets/RDS_DB_NAME",
+        "/copilot/shorturl/" + "shorturl-" + APP_ENV + "/secrets/RDS_USERNAME",
+        "/copilot/shorturl/" + "shorturl-" + APP_ENV + "/secrets/RDS_PASSWORD",
+        "/copilot/shorturl/" + "shorturl-" + APP_ENV + "/secrets/RDS_PORT",
     ]
 
     for parameter in parameter_list:
@@ -163,8 +163,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "/static/"
-if not DEBUG:
-    STATIC_ROOT = os.path.join(BASE_DIR, "collect_static")
+STATIC_ROOT = os.path.join(BASE_DIR, "collect_static")
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]

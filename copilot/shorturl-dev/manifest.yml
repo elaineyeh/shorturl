@@ -26,7 +26,9 @@ http:
 # Configuration for your containers and service.
 image:
   # Docker build arguments. For additional overrides: https://aws.github.io/copilot-cli/docs/manifest/lb-web-service/#image-build
-  build: Dockerfile
+  build:
+    dockerfile: docker/Dockerfile
+    context: ./
   # Port exposed through your container to route traffic to it.
   port: 8000
 command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
