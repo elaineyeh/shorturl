@@ -28,4 +28,8 @@ stages:
     # requires_approval: true
     # Optional: use test commands to validate this stage of your build.
     # test_commands: [echo 'running tests', make test]
-
+    deployments:
+      deploy-env:
+        stack_name: shorturl-shorturl-dev-shorturl-dev
+        template_path: infrastructure/shorturl-dev-shorturl-dev.stack.yml
+        template_config: infrastructure/shorturl-dev-shorturl-dev.params.json
