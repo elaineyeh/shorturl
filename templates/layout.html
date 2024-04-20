@@ -18,23 +18,31 @@
 	    <div class="row">
 		    <div class="col-md-12">
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="{% url 'shorturl:index' %}">Short Url</a>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto">
-                        {% if request.user.is_authenticated %}
-                        <li class="nav-item active">
-                                <a class="nav-link" href="{% url 'logout' %}">Sign out<span class="sr-only">(current)</span></a>
-                        {% else %}
-                            <li class="nav-item active"></li>
-                            <a class="nav-link" href="{% url 'login' %}">Sign in<span class="sr-only">(current)</span></a>
-                        {% endif %}
-                        </li>
-                    </ul>
-                </div>
+                    <a class="navbar-brand" href="{% url 'shorturl:index' %}">Short Url</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarScroll">
+                        <ul class="navbar-nav mr-auto my-2 my-lg-0 navbar-nav-scroll" style="max-height: 100px;">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'shorturl:list' %}">Urls list</a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav ml-auto">
+                            {% if request.user.is_authenticated %}
+                            <li class="nav-item active">
+                                    <a class="nav-link" href="{% url 'logout' %}">Sign out<span class="sr-only">(current)</span></a>
+                            {% else %}
+                                <li class="nav-item active"></li>
+                                <a class="nav-link" href="{% url 'login' %}">Sign in<span class="sr-only">(current)</span></a>
+                            {% endif %}
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
             </div>
 	    </div>
-        <div class="row">
+        <div class="row mt-5">
 		    <div class="col-md-12">
                 {% block body %}{% endblock %}
 		    </div>

@@ -1,0 +1,10 @@
+#record_table {
+    display: inline-table;
+    overflow-x: scroll;
+    white-space: nowrap;
+    width: 100%;
+}
+
+#list_table {
+    overflow: auto;
+}

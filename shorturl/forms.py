@@ -48,9 +48,11 @@ class UrlInfoForm(forms.ModelForm):
     remark = forms.CharField(widget=forms.Textarea)
 
     def __init__(self, *args, **kwargs):
+        editable = kwargs.pop("editable", False)
         super(UrlInfoForm, self).__init__(*args, **kwargs)
-        for field_name, field in self.fields.items():
-            field.widget.attrs['readonly'] = 'readonly'
+        if not editable:
+            for field_name, field in self.fields.items():
+                field.widget.attrs['readonly'] = 'readonly'
 
 
     class Meta:

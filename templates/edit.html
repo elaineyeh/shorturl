@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% load bootstrap4 %}
+{% load static %}
+
+{% block body %}
+    <br>
+    <div class="row justify-content-center">
+        <div class="col">
+            <form action="" method="post" class="form">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                {% buttons %}
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-info mt-3">
+                            Generate
+                        </button>
+                    </div>
+                {% endbuttons %}
+            </form>
+        </div>
+    </div>
+{% endblock %}

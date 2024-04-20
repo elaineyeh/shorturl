@@ -8,9 +8,9 @@ django = "*"
 djangorestframework = "*"
 psycopg2-binary = "*"
 django-environ = "*"
-django-bootstrap4 = "*"
 drf-yasg = "*"
 boto3 = "*"
+django-bootstrap4 = "*"
 
 [dev-packages]
 autopep8 = "*"

@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% load bootstrap4 %}
+{% load static %}
+
+{% block body %}
+    <link href="{% static 'list.css' %}" rel="stylesheet">
+    <div id="list_table">
+        <table class="table table-hover" id="record_table">
+            <thead>
+                <tr>
+                    <th scope="col" class="text-center">Url</th>
+                    <th scope="col" class="text-center">Code</th>
+                    <th scope="col" class="text-center">Edit</th>
+                    <th scope="col" class="text-center">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in urls %}
+                    <tr>
+                        <td>{{ item.url }}</td>
+                        <td class="text-center">{{ item.code }}</td>
+                        <td class="text-center">
+                            <a href="{% url 'shorturl:edit' pk=item.id %}"
+                               id="edit_expense">
+                                Edit
+                            </a>
+                        </td>
+                        <td class="text-center">
+                            <a href="{% url 'shorturl:delete' pk=item.id %}"
+                               onclick="return confirm('確定要刪除該筆紀錄嗎 ?')"
+                               id="delete_expense">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="6" class="text-center">Doesn't have record yet.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
